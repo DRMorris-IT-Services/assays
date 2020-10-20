@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace duncanrmorris\assays\Http\Controllers;
 
-use App\assays;
+use Illuminate\Routing\Controller;
+
+use duncanrmorris\App\assays;
 use Illuminate\Http\Request;
 
 class AssaysController extends Controller
@@ -15,6 +17,8 @@ class AssaysController extends Controller
     public function index()
     {
         //
+
+        return view('assays::index');
     }
 
     /**
