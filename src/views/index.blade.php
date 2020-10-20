@@ -11,7 +11,7 @@
 
 @if($count == 0)
 <div class="row justify-content-end">
-<a href="{{route('clients.controls',['id' => AUTH::user()->id])}}"><i class="fa fa-cog text-info"></i></a>
+<a href="{{route('assays.controls',['id' => AUTH::user()->id])}}"><i class="fa fa-cog text-info"></i></a>
 </div>
 
 <h2>Setup Required</h2>
@@ -20,7 +20,7 @@
 @if($count >= 1)
 @foreach($controls as $c)
 
-@if($c->assays_admin == "on")
+@if($c->assay_admin == "on")
 <div class="row justify-content-end">
   <a href="{{route('assays.controls',['id' => AUTH::user()->id])}}"><i class="fa fa-cog text-info"></i></a>
   </div>
@@ -32,7 +32,7 @@
         <li class="nav-item">
           <a class="nav-link active" id="home-tab" href="{{route('assays')}}" role="tab" aria-controls="list" aria-selected="true">List</a>
         </li>
-        @if($c->assays_add == "on")
+        @if($c->assay_add == "on")
         <li class="nav-item">
         <a class="nav-link" id="new-tab" href="#" data-toggle="modal" data-target="#newclient" role="tab" aria-controls="new" aria-selected="true">New Assay</a>
         </li>
@@ -48,7 +48,7 @@
 
                 <div class="card-body">
                     
-                    @if($c->assays_view == "on")
+                    @if($c->assay_view == "on")
                     <table class="table">
                         <thead>
                            

@@ -5,7 +5,12 @@ namespace duncanrmorris\assays\Http\Controllers;
 use Illuminate\Routing\Controller;
 
 use duncanrmorris\assays\App\assays;
+use duncanrmorris\assays\App\assayscontrols;
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AssaysController extends Controller
 {
@@ -14,14 +19,14 @@ class AssaysController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(assays $assays)
+    public function index(assays $assays, assayscontrols $assayscontrols)
     {
         //
 
         return view('assays::index',[
-            'assays' => $assays->get(),
-            'controls' => $clientscontorls->where('user_id',Auth::user()->id)->get(),
-            'count' => $clientscontorls->count(),
+            'assays' => $assays->paginate(15),
+            'controls' => $assayscontrols->where('user_id',Auth::user()->id)->get(),
+            'count' => $assayscontrols->count(),
         ]);
     }
 

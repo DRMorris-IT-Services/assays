@@ -13,12 +13,13 @@ class CreateAssaysControlsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assays_controls', function (Blueprint $table) {
+        Schema::create('assayscontrols', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
             $table->string('assay_admin')->nullable();
             $table->string('assay_view')->nullable();
             $table->string('assay_add')->nullable();
+            $table->string('assay_edit')->nullable();
             $table->string('assay_del')->nullable();
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ class CreateAssaysControlsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assays_controls');
+        Schema::dropIfExists('assayscontrols');
     }
 }
