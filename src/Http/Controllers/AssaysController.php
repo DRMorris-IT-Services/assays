@@ -4,7 +4,7 @@ namespace duncanrmorris\assays\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 
-use duncanrmorris\App\assays;
+use duncanrmorris\assays\App\assays;
 use Illuminate\Http\Request;
 
 class AssaysController extends Controller
@@ -14,11 +14,15 @@ class AssaysController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(assays $assays)
     {
         //
 
-        return view('assays::index');
+        return view('assays::index',[
+            'assays' => $assays->get(),
+            'controls' => $clientscontorls->where('user_id',Auth::user()->id)->get(),
+            'count' => $clientscontorls->count(),
+        ]);
     }
 
     /**
