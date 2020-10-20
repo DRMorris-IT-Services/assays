@@ -15,6 +15,12 @@ class CreateAssaysTable extends Migration
     {
         Schema::create('assays', function (Blueprint $table) {
             $table->id();
+            $table->string('assay_id');
+            $table->string('assay_name')->nullable();
+            $table->string('assay_barcode')->nullable();
+            $table->string('assay_lot_no')->nullable();
+            $table->date('assay_manufactured_date')->nullable();
+            $table->string('assay_status')->nullable();
             $table->timestamps();
         });
     }

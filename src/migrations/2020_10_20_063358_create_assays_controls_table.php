@@ -15,6 +15,11 @@ class CreateAssaysControlsTable extends Migration
     {
         Schema::create('assays_controls', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
+            $table->string('assay_admin')->nullable();
+            $table->string('assay_view')->nullable();
+            $table->string('assay_add')->nullable();
+            $table->string('assay_del')->nullable();
             $table->timestamps();
         });
     }
