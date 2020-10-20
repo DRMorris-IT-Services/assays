@@ -1,0 +1,14 @@
+{
+    "name": "duncanrmorris/assays",
+    "description": "The Assays Package for Laravel ^7.2",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Duncan Morris",
+            "email": "d.morris@drmorris-itservices.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
