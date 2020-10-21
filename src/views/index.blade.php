@@ -2,11 +2,7 @@
 
 @section('content')
 <div class="container">
-    @if (session('status'))
-    <div class="alert alert-success" role="alert">
-    {{ session('status') }}
-    </div>
-    @endif
+    @include('assays::layouts.alerts')
 
 
 @if($count == 0)
@@ -79,7 +75,74 @@
                         <td>{{date('d/m/y', strtotime($as->assay_manufactured_date))}}</td>
                         <td>{{$as->assay_status}}</td>
                         <td>
-                        <button class="btn btn-sm btn-outline-warning fa fa-edit"></button>
+                        @if($c->assay_edit == "on")
+                        <button class="btn btn-sm btn-outline-warning fa fa-edit" data-toggle="modal" data-target="#editassay{{$as->assay_id}}"></button>
+                                <!-- NEW CLIENT MODAL -->  
+                                <div class="modal fade" id="editassay{{$as->assay_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header card-header bg-warning">
+                                                <h4 class="modal-title" id="exampleModalLongTitle">Edit Assay</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form class="col-md-12" action="{{ route('assays.update',['id' => $as->assay_id]) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')  
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                    <h5>Name</h5>
+                                                    <input type="text" name="name" class="form-control" placeholder="Assay Name" required value="{{$as->assay_name}}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                    <h5>Barcode</h5>
+                                                    <input type="text" name="barcode" class="form-control" placeholder="Barcode" value="{{$as->assay_barcode}}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                    <h5>Lot Number</h5>
+                                                    <input type="text" name="assay_lot_no" class="form-control" placeholder="Assay Lot Number" required value="{{$as->assay_lot_no}}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                    <h5>Manufactured Date</h5>
+                                                    <input type="text" name="manufactured_date" class="form-control" placeholder="Assay Manufactured Date" required value="{{$as->assay_manufactured_date}}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                    <h5>Statis</h5>
+                                                    <select name="status" class="form-control">
+                                                    <option>{{$as->assay_status}}</option>
+                                                    <option>----</option>
+                                                    <option>Approval In Progress</option>
+                                                    <option>Approved For Sale</option>
+                                                    <option>Un-Approved</option>
+                                                    <option>Sold-Out</option>
+                                                    </select>
+                                                    </div>
+
+                                                                
+                                                                        
+                                                            
+                                                                        
+                                                                        
+                                                    </div>
+                                                            
+                                                        <div class="modal-footer card-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                <!-- END -->
+                                @endif
+
                         <button class="btn btn-sm btn-outline-danger fa fa-trash"></button>
                         </tr>
                          @endforeach

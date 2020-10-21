@@ -100,9 +100,20 @@ class AssaysController extends Controller
      * @param  \App\assays  $assays
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, assays $assays)
+    public function update(Request $request, assays $assays, $id)
     {
         //
+
+        assays::where('assay_id', $id)
+        ->update([
+            'assay_name' => $request['name'],
+            'assay_barcode' => $request['barcode'],
+            'assay_lot_no' => $request['assay_lot_no'],
+            'assay_manufactured_date' => $request['manufactured_date'],
+            'assay_status' => $request['status'],
+        ]);
+
+        return back()->withStatus(__('Assay Successfully Updated.'));
     }
 
     /**
@@ -111,8 +122,13 @@ class AssaysController extends Controller
      * @param  \App\assays  $assays
      * @return \Illuminate\Http\Response
      */
-    public function destroy(assays $assays)
+    public function destroy(assays $assays, $id)
     {
         //
+
+        assays::where('assay_id', $id)
+        ->delete();
+
+        return back()->withDelete(__('Assay Successfully Deleted.'));
     }
 }
