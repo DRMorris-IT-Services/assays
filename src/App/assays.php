@@ -16,6 +16,7 @@ class assays extends Model
      * @var array
      */
     protected $fillable = [
-        'assay_id', 
+        'assay_id', 'assay_name', 'assay_barcode', 'assay_lot_no', 'assay_manufactured_date', 'assay_status'
+
     ];
 }

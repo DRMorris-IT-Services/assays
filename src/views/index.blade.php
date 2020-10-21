@@ -51,19 +51,36 @@
                     @if($c->assay_view == "on")
                     <table class="table">
                         <thead>
-                           
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Barcode
+                            </th>
+                            <th>
+                                Lot No.
+                            </th>
+                            <th>
+                                Manufactured Date
+                            </th>
                             <th>
                                 Status
                             </th>
-                            
-                          
+                            <th>
+                                Actions
+                            </th>
                         </thead>
                         <tbody>
-                        @foreach( $assays as $assays)
+                        @foreach( $assays as $as)
                         <tr>
-                        <td><a href="{{ route('assays.view',[$assays->assay_id]) }}" >{{$assay->name}}</a></td>
-                        
-                        <td>{{$assay->status}}</td>
+                        <td><a href="{{ route('assays.view',[$as->assay_id]) }}" >{{$as->assay_name}}</a></td>
+                        <td>{{$as->assay_barcode}}</td>
+                        <td>{{$as->assay_lot_no}}</td>
+                        <td>{{date('d/m/y', strtotime($as->assay_manufactured_date))}}</td>
+                        <td>{{$as->assay_status}}</td>
+                        <td>
+                        <button class="btn btn-sm btn-outline-warning fa fa-edit"></button>
+                        <button class="btn btn-sm btn-outline-danger fa fa-trash"></button>
                         </tr>
                          @endforeach
                 </tbody>
@@ -78,68 +95,43 @@
     </div>
 </div>
 
-@if($c->clients_add == "on")
+@if($c->assay_add == "on")
 <!-- NEW CLIENT MODAL -->  
 <div class="modal fade" id="newclient" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">New Client</h5>
+                <h4 class="modal-title" id="exampleModalLongTitle">New Assay</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="col-md-12" action="{{ route('clients.add') }}" method="POST" enctype="multipart/form-data">
+            <form class="col-md-12" action="{{ route('assays.add') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')  
                 <div class="modal-body">
                     <div class="form-group">
-                                <h5>Company</h5>
-                                <input type="text" name="name" class="form-control" placeholder="Company" required>
-                                </div>
+                    <h5>Name</h5>
+                    <input type="text" name="name" class="form-control" placeholder="Assay Name" required>
+                    </div>
+
+                    <div class="form-group">
+                    <h5>Barcode</h5>
+                    <input type="text" name="barcode" class="form-control" placeholder="Barcode" value="">
+                    </div>
+
+                    <div class="form-group">
+                    <h5>Lot Number</h5>
+                    <input type="text" name="assay_lot_no" class="form-control" placeholder="Assay Lot Number" required>
+                    </div>
+
+                    <div class="form-group">
+                    <h5>Manufactured Date</h5>
+                    <input type="text" name="manufactured_date" class="form-control" placeholder="Assay Manufactured Date" required>
+                    </div>
 
                                 
-                                        <h5>Address Info</h5>
                                         
-                                    
-                                            <div class="form-group">
-                                            @if ($c->address == '')
-                                            <span class="badge badge-pill bg-danger">&nbsp;</span>
-                                            @endif
-                                            <input type="text" name="address" class="form-control" placeholder="Address" >
-                                            </div>
-                                                <div class="form-group">
-                                                @if ($c->town == '')
-                                                <span class="badge badge-pill bg-danger">&nbsp;</span>
-                                                @endif
-                                                <input type="text" name="town" class="form-control" placeholder="Town" >
-                                                </div>
-                                                    <div class="form-group">
-                                                    @if ($c->county == '')
-                                                    <span class="badge badge-pill bg-danger">&nbsp;</span>
-                                                    @endif
-                                                    <input type="text" name="county" class="form-control" placeholder="County">
-                                                    </div>
-                                                        <div class="form-group">
-                                                        @if ($c->postcode == '')
-                                                        <span class="badge badge-pill bg-danger">&nbsp;</span>
-                                                        @endif
-                                                        <input type="text" name="postcode" class="form-control" placeholder="Postcode">
-                                                        </div>
-                                                            <div class="form-group">
-                                                            @if ($c->country == '')
-                                                            <span class="badge badge-pill bg-danger">&nbsp;</span>
-                                                            @endif
-                                                            <input type="text" name="country" class="form-control" placeholder="Country" >
-                                                            </div>
-                                
-                        
-                                
-                                        <h5>Tax Info</h5>
-                                        
-                                            <div class="form-group">
-                                            <input type="text" name="tax_no" class="form-control" placeholder="Tax ID" >
-                                            </div>
                             
                                         
                                         

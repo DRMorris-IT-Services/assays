@@ -49,6 +49,26 @@ class AssaysController extends Controller
     public function store(Request $request)
     {
         //
+
+        $assay_id = Str::random(60);
+        $barcode = $request['barcode'];
+
+        if($barcode == ""){
+            $barcode = rand();
+        }else{
+            $barcode == $request['barcode'];
+        }
+
+        assays::create([
+            'assay_id' => $assay_id,
+            'assay_name' => $request['name'],
+            'assay_barcode' => $barcode,
+            'assay_lot_no' => $request['assay_lot_no'],
+            'assay_manufactured_date' => $request['manufactured_date'],
+            'assay_status' => "Pending Approval",
+        ]);
+
+        return back()->withStatus(__('Assay Successfully Created.'));
     }
 
     /**
