@@ -9,6 +9,7 @@ Route::group(['namespace' => 'duncanrmorris\assays\Http\Controllers'], function(
         Route::get('assays/edit/{id}', 'AssaysController@edit')->name('assays.edit');
         Route::put('assays/update/{id}', 'AssaysController@update')->name('assays.update');
         Route::get('assays/view/{id}', 'AssaysController@show')->name('assays.view');
+        Route::put('assays/del/{id}', 'AssaysController@destroy')->name('assays.del');
         Route::get('assays/search/{search}','AssaysController@search')->name('assays.search');
 
     ### CONTROLS ###
